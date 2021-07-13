@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const SCKEY = process.env.SCKEY;
+const MESSAGE_URL = process.env.MESSAGE_URL;
 axios.defaults.headers.common.cookie = process.env.COOKIE;
 
 const checkIn = async () => {
@@ -23,9 +23,10 @@ const status = async () => {
 const server = (checkInMessage, leftDays) => {
     return axios({
         method: 'get',
-        url: `https://sc.ftqq.com/${SCKEY}.send`,
+        url: `${MESSAGE_URL}`,
         params: {
-            text: `${leftDays}天后到期，${checkInMessage}`
+            title:'GLaDOS-AUTO-CHECKIN',
+            content: `${leftDays}天后到期，${checkInMessage}`
         }
     })
 }
