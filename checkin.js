@@ -22,9 +22,9 @@ const status = async () => {
 
 const server = (checkInMessage, leftDays) => {
     return axios({
-        method: 'get',
+        method: 'post',
         url: `${MESSAGE_URL}`,
-        params: {
+        data: {
             title:'GLaDOS-AUTO-CHECKIN',
             content: `${leftDays}天后到期，${checkInMessage}`
         }
@@ -35,7 +35,7 @@ const GLaDOSCheckIn = async () => {
     const checkInMessage = (await checkIn())?.data?.message;
     const leftDays = parseInt((await status())?.data?.data?.leftDays);
     console.log(leftDays, checkInMessage);
-    if (SCKEY) {
+    if (MESSAGE_URL) {
         server(checkInMessage, leftDays);
     }
 }
